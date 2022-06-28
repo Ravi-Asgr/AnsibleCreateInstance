@@ -19,7 +19,7 @@ pipeline {
             when {
                 expression {
                     echo 'define condition for each stage'
-                    BRANCH_NAME == 'main' || 'develop'
+                    ENV_VAR == 'ABC' || 'develop'
                 }
             }
             steps {
