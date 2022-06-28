@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+    environment {
+        ENV_VAR = 'ABC'
+    }
+    parameters {
+        choice(name:'version', choices: ['1.1', '1.2'], description: 'options')
+    }
+    stages {
+        stage('Build') {
+            steps {
+               echo 'building project' 
+               echo "{ENV_VAR}" 
+               echo 'conditions, expression, environment, tools, parameters, '
+               //sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            when {
+                expression {
+                    echo 'define condition for each stage'
+                    BRANCH_NAME == 'main' || 'develop'
+                }
+            }
+            steps {
+                echo 'stage for main or master only'
+                echo 'http://localhost:1234/env-vars.html/'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'try sending email - always, success and failure'
+        }
+    }
+}
