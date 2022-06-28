@@ -13,6 +13,7 @@ pipeline {
                echo "{ENV_VAR}" 
                echo 'conditions, expression, environment, tools, parameters, '
                //sh 'mvn clean install'
+                sh 'ls -ll'
             }
         }
         stage('Test') {
